@@ -1,18 +1,29 @@
 const tableBody = document.querySelector("#tableBody");
 const parksDropdown = document.getElementById("parksDropdown");
 const filterByParkLocation = document.getElementById("filterByParkLocation");
-const filterLocationRadio = document.getElementById("parkType")
-const parksTypeDropdown = document.getElementById("parksTypeDropdown")
-console.log(tableBody);
+const filterLocationRadio = document.getElementById("parkType");
+const parksTypeDropdown = document.getElementById("parksTypeDropdown");
+// console.log(tableBody);
 
 function populateDropdown() {
-  for (const element of locationsArray) {
+  for (const state of locationsArray) {
     let createOption = document.createElement("option");
-    createOption.innerText = element;
-    createOption.value = element;
+    createOption.innerText = state;
+    // createOption.value = element.State;
     parksDropdown.appendChild(createOption);
   }
 }
+
+function populateTypeDropdown() {
+  for (const state of parkTypesArray) {
+    let createOption = document.createElement("option");
+    createOption.innerText = state;
+    // createOption.value = element.State;
+    parksTypeDropdown.appendChild(createOption);
+    // console.log(state)
+  }
+}
+populateTypeDropdown();
 
 populateDropdown();
 
@@ -56,8 +67,8 @@ function loadParks() {
       let createLink = document.createElement("a");
       createLink.href = element.Visit;
       createLink.target = "_blank";
-      createLink.innerText = element;
-      tableData6.appendChild(createLink);
+      createLink.innerText = "visit";
+      tableData8.appendChild(createLink);
     }
     // }
   }
@@ -94,13 +105,15 @@ function filterTable() {
     tableData7.innerText = element.Phone;
 
     let tableData8 = tableRow.insertCell();
+    tableData8.innerText = element.Website;
+
     // tableData6.innerText = element.Visit;
     if (element.Visit) {
       let createLink = createElement("a");
       createLink.href = element.Visit;
       createLink.target = "_blank";
-      createLink.innerText = element;
-      tableData6.appendChild(createLink);
+      createLink.innerText = "visit";
+      tableData8.appendChild;
     }
   }
   // for (const park of tableFilter) {
@@ -116,7 +129,7 @@ function filterTable() {
 }
 
 function filterTableType() {
-  let dropdownID = parksDropdown.value;
+  let dropdownID = parksTypeDropdown.value;
   let tableFilter = nationalParksArray.filter((parkState) => parkState.LocationName.includes(dropdownID));
   tableBody.innerHTML = "";
   for (const element of tableFilter) {
@@ -149,8 +162,8 @@ function filterTableType() {
       let createLink = document.createElement("a");
       createLink.href = element.Visit;
       createLink.target = "_blank";
-      createLink.innerText = element;
-      tableData6.appendChild(createLink);
+      createLink.innerText = "Visit";
+      tableData8.appendChild(createLink);
     }
   }
   // for (const park of tableFilter) {
@@ -165,31 +178,32 @@ function filterTableType() {
   // }
 }
 
-function applyFilter(){
+function applyFilter() {
   const selectedType = parksDropdown.value;
   const selectedState = parksDropdown.value;
 
-  tableBody.innerHTML = ""
+  tableBody.innerHTML = "";
 
   let filteredParks = nationalParksArray;
 
-  if(selectedType){
-    filteredParks = filteredParks.filter((park)=> park.LocationName.includes(selectedType))
-  }else{
-    filteredParks = filteredParks.filter((park)=> park.State === selectedState)
+  if (selectedType) {
+    filteredParks = filteredParks.filter((park) => park.LocationName.includes(selectedType));
+  } else {
+    filteredParks = filteredParks.filter((park) => park.State === selectedState);
   }
 
-  filteredParks.forEach(loadParks)
+  filteredParks.forEach(loadParks);
 }
 
 function toggleFilter() {
-  parksDropdown.innerHTML = "";
+  parksDropdown.length = 1;
   if (filterByParkLocation.checked) {
-
+    parksDropdown.style.display = "block";
+    parksTypeDropdown.style.display = "none";
     displayStates();
   } else {
-    parksDropdown.style.display = "none"
-    parksTypeDropdown.style.display = "block"
+    parksDropdown.style.display = "none";
+    parksTypeDropdown.style.display = "block";
     displayParkTypes();
   }
 }

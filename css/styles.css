@@ -1,0 +1,10 @@
+.activeLink {
+  background-color: rgb(63, 14, 14);
+  color:antiquewhite;
+}
+
+.card{
+    display: none;
+}
+/* if this is an id you grab it like this = #card */
+/* when you want to grab an element by class you use a dot like this = .card */
